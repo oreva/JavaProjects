@@ -1,0 +1,25 @@
+# Compiled source #
+###################
+*.class
+
+# IDEA files #
+###################
+.idea
+.idea/*
+*.iml
+
+# Target folder #
+###################
+target
+target/*
+
+# Package Files #
+###################
+*.jar
+*.war
+*.ear
+
+# Ignore lib directory
+###################
+lib/
+lib/*
