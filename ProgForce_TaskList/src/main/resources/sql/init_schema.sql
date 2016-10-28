@@ -7,7 +7,7 @@ IDENTIFIED BY 'tasklist';
 --
 -- Create DB
 --
-CREATE DATABASE  IF NOT EXISTS tasklist_schema;
+CREATE DATABASE IF NOT EXISTS tasklist_schema;
 
 
 --
@@ -28,6 +28,18 @@ CREATE TABLE task (
   id bigint NOT NULL AUTO_INCREMENT,
   name varchar(255) DEFAULT NULL,
   date_due datetime DEFAULT NULL,
+  priority int DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY id_UNIQUE (id)
+) /*ENGINE=InnoDB*/ DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS archived_task;
+CREATE TABLE archived_task (
+  id bigint NOT NULL AUTO_INCREMENT,
+  task_id bigint NOT NULL,
+  name varchar(255) DEFAULT NULL,
+  date_due datetime DEFAULT NULL,
+  date_archived datetime DEFAULT NULL,
   priority int DEFAULT NULL,
   PRIMARY KEY (id),
   UNIQUE KEY id_UNIQUE (id)

@@ -63,4 +63,48 @@ public class TaskDAO implements EntityDAO<Task> {
             connection.close();
         }
     }
+
+    @Override
+    public void delete(Task entity) throws SQLException {
+        Connection connection = null;
+        try {
+            connection = DBManager.instance().getConnection();
+
+            String sql = "delete from task where id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, entity.getId());
+
+            statement.executeUpdate();
+        } finally {
+            connection.close();
+        }
+    }
+
+    @Override
+    public Task findById(Long id) throws SQLException {
+        Connection connection = null;
+        try {
+            connection = DBManager.instance().getConnection();
+
+            String sql = "select id, name, priority, date_due from task where id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            Task task = null;
+            while (resultSet.next()) {
+                task = new Task(
+                        resultSet.getLong(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3),
+                        (Date) resultSet.getObject(4)
+                );
+                break;
+            }
+            return task;
+
+        } finally {
+            connection.close();
+        }
+    }
 }
