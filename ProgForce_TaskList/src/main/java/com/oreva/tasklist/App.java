@@ -21,6 +21,5 @@ public class App
     {
         HomeController controller = HomeController.getDefaultController();
         controller.showMainMenu();
-        System.out.println("End");
     }
 }
